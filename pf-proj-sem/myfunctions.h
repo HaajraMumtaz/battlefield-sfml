@@ -552,13 +552,12 @@ inline bool isValid(int x, int y, int SIZE, int parallel[10][10])
     return x >= 0 && x < SIZE && y >= 0 && y < SIZE && parallel[x][y] != 0;
 }
 // Perform a random strike
-inline bool randomStrike(int  parallel[10][10], int& x, int y)
+inline bool randomStrike(int  parallel[10][10], int& x, int &y)
 {
     bool placed = 0;
     srand(time(NULL));
     do
     {
-        cout << "bhai" << endl;
         x = rand() % 10;
         y = rand() % 10;
      
@@ -567,225 +566,6 @@ inline bool randomStrike(int  parallel[10][10], int& x, int y)
     return placed;
 
 }
-// stores possible next hit locations after a successful strike
-//inline void storeNextHits(int x, int y, int possibleHits[100][2], int& hitCount, Board board, int parallel[10][10], int SIZE, int& lasthit, int& targets) //x, y is of previous hit strike
-//{
-//    int nx1 = 1;
-//    int ny1 = 1;
-//    int nx2 = 1;
-//    int ny2 = 1;
-//    int Y = 1;
-//    int X = 1;
-//    if (x < SIZE - 1)//for endpoint
-//    {
-//        nx1 = x + 1;
-//        ny1 = y;
-//        nx2 = x - 1;
-//        ny2 = y;
-//        if (isValid(nx1, ny1, SIZE, parallel))// parallel[nx1][ny1] != 0)
-//        {
-//            possibleHits[hitCount][0] = nx1;
-//            possibleHits[hitCount][1] = ny1;
-//            hitCount = hitCount + 1;
-//            targets = targets + 1;
-//            if (parallel[nx1][ny1] == 1)//vertically stored
-//            {
-//                X = nx1;
-//                //lasthit = 1;
-//                do
-//                {
-//                    if (isValid(X, ny1, SIZE, parallel))
-//                    {
-//                        X = X + 1;
-//                        possibleHits[hitCount][0] = X;
-//                        possibleHits[hitCount][1] = ny1;
-//                        hitCount = hitCount + 1;
-//                        targets = targets + 1;
-//                    }
-//                } while (parallel[X][ny1] == 1 && isValid(X, ny1, SIZE, parallel) && x < SIZE - 1);//ADD THIS LOGIC TO ALL
-//            }
-//
-//        }
-//    }
-//    if (x > 0)
-//    {
-//        if (isValid(nx2, ny2, SIZE, parallel)) //&& parallel[nx2][ny2] != 0)
-//        {
-//            possibleHits[hitCount][0] = nx2;
-//            possibleHits[hitCount][1] = ny2;
-//            hitCount = hitCount + 1;
-//            targets = targets + 1;
-//            if (parallel[nx2][ny2] == 1)//vertically stored ooper
-//            {
-//                X = nx2;
-//                lasthit = 1;
-//                do
-//
-//                {
-//                    if (isValid(X, ny2, SIZE, parallel))
-//                    {
-//                        X = X - 1;
-//                        possibleHits[hitCount][0] = X;
-//                        possibleHits[hitCount][1] = ny2;
-//                        hitCount = hitCount + 1;
-//                        targets = targets + 1;
-//                    }
-//                } while (parallel[X][ny2] == 1 && isValid(X, ny2, SIZE, parallel) && x > 0);
-//            }
-//
-//        }
-//    }
-//    nx1 = x;
-//    ny1 = y + 1;
-//    nx2 = x;
-//    ny2 = y - 1;
-//    if (y < SIZE - 1)
-//    {
-//        if (isValid(nx1, ny1, SIZE, parallel))//&& parallel[nx1][ny1] != 0)
-//        {
-//            possibleHits[hitCount][0] = nx1;
-//            possibleHits[hitCount][1] = ny1;
-//            hitCount = hitCount + 1;
-//            targets = targets + 1;
-//            if (parallel[nx1][ny1] == 1)//horizontally stored rightwards
-//            {
-//                Y = ny1;
-//                lasthit = 1;
-//                do
-//                {
-//                    if (isValid(nx1, Y, SIZE, parallel))
-//                        Y = Y + 1;
-//                    possibleHits[hitCount][0] = nx1;
-//                    possibleHits[hitCount][1] = Y;
-//                    hitCount = hitCount + 1;
-//                    targets = targets + 1;
-//                } while (parallel[nx1][Y] == 1 && isValid(nx1, Y, SIZE, parallel) && y < SIZE - 1);
-//            }
-//
-//        }
-//    }
-//    if (y > 0)
-//    {
-//        if (isValid(nx2, ny2, SIZE, parallel))
-//        {
-//            possibleHits[hitCount][0] = nx2;
-//            possibleHits[hitCount][1] = ny2;
-//            hitCount = hitCount + 1;
-//            targets = targets + 1;
-//            if (parallel[nx2][ny2] == 1)//horizontally stored 
-//            {
-//                Y = ny2;
-//
-//                do
-//                {
-//                    if (isValid(nx2, Y, SIZE, parallel))
-//                        Y = Y - 1;
-//                    possibleHits[hitCount][0] = nx2;
-//                    possibleHits[hitCount][1] = Y;
-//                    hitCount = hitCount + 1;
-//                    targets = targets + 1;
-//                } while (parallel[nx2][Y] == 1 && isValid(nx2, Y, SIZE, parallel) && y > 0);
-//            }
-//
-//        }
-//    }
-//
-//
-//}
-//inline void strike(int possibleHits[100][2], int& hitCount, int& score, Board board, int parallel[10][10], int& targets, int& lasthit, bool placed)
-//{
-//    if (hitCount > 0)
-//    {
-//        int pointer = 0;
-//        //getting next possible hit and updating
-//        int x = possibleHits[pointer][0];
-//        int y = possibleHits[pointer][1];
-//        pointer++;
-//
-//
-//        if (parallel[x][y] == 1)
-//        {
-//            parallel[x][y] = 2; //hit
-//            board.grid[x][y].setColor(Color(139, 0, 0));
-//            lasthit = 1;
-//            targets--;
-//            placed = 1;
-//        }
-//        else {
-//            parallel[x][y] = 2; // miss
-//            score = score - 1;
-//            lasthit = 0;
-//            targets--;
-//            board.grid[x][y].setColor(Color(169, 169, 169));
-//            placed = 1;
-//        }
-//
-//    }
-//}
-//inline bool call(int parallel[10][10], Board& board,int& compscore,int&x,int&y)
-//{
-//    cout << "haajra in call";
-//    const int SIZE = 10;
-//    bool placed = 0;
-//
-//    int score = 100;
-//    int possibleHits[100][2]; //stores the next possible hits
-//    int hitCount = 0; // count of possible next hits
-//    int lasthit = 0;//last hit was succesful or not
-//    int targets = 0;
-//
-//
-//
-//    //last hit not successful or (successful and no more targets to be hit)
-//    if (lasthit == 0 || (lasthit == 1 && targets == 0))
-//
-//    {
-//
-//        cout << "in if";
-//        x = -1;
-//        y = -1;
-//        cout << "" << x << y << "222";
-//        y = randomStrike(SIZE, parallel, x, y);//x passed by reference
-//        cout << x << y << "*******";
-//
-//
-//        if (parallel[x][y] == 1)
-//        {
-//
-//            parallel[x][y] = 2; // mark as hit
-//            board.grid[x][y].setColor(Color::Red);
-//            cout << "if statements";
-//            lasthit = 1;
-//
-// 
-//            placed = 1;
-//        }
-//        else
-//        {
-//            parallel[x][y] = 2; // miss
-//            score -= 1;
-//            lasthit = 0;
-//            board.grid[x][y].setColor(Color::Green);
-//            placed = 1;
-//            cout << "If statement 2";
-//        }
-//    }
-//    if (lasthit == 1)
-//    {
-//        if (targets > 0)
-//        {
-//            strike(possibleHits, hitCount, score, board, parallel, targets, lasthit, placed);
-//
-//
-//        }
-//
-//    }
-//    cout << "blagh blagh" << placed << endl;
-//    return placed;
-//}
-
-
-////////////////////////////////////////////////////////////////////////
 ////////////////////leaderboard functions
 struct Player {
     std::string name;
@@ -900,5 +680,17 @@ inline void getLastTwoLines(const std::string& filename, std::string& line1, std
     }
 
     file.close();
+}
+
+inline void boardreinitialize(Board &board,Texture texture)
+{
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            continue;
+          
+        }
+    }
 }
 

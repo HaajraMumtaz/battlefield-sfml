@@ -10,7 +10,7 @@ using namespace std;
 //signatures
 
 
-ScreenState MineMode(sf::RenderWindow& window, Board& board,Board&board2 ,sf::Texture& texture, int positions[5][2],int positions2[5][2], sf::View gameView,string name1,string name2)
+ScreenState MineMode(sf::RenderWindow& window, Board board,Board board2 ,sf::Texture& texture, int positions[5][2],int positions2[5][2], sf::View gameView,string name1,string name2)
 {
 
 	ScreenState screenstate = NEWMODE;

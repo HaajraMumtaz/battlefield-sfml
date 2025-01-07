@@ -7,7 +7,7 @@
 
 static string filename="scores.txt";
 // Function declarations
-ScreenState maingame(sf::RenderWindow& window, Board& board, sf::Texture& texture, int positions[5][2],View gameView, Player players[100], int &playerCount);
+ScreenState maingame(sf::RenderWindow& window, Board board, sf::Texture& texture, int positions[5][2],View gameView, Player players[100], int &playerCount);
 
 ScreenState screenOne(sf::RenderWindow& window, Board& board, sf::Texture& texture, int positions[5][2],
     sf::View gameView, ScreenState screenState, bool showPopup = true,
@@ -15,7 +15,7 @@ ScreenState screenOne(sf::RenderWindow& window, Board& board, sf::Texture& textu
 
 ScreenState menu(sf::RenderWindow& window, sf::View gameView,Board board);
 
-ScreenState MineMode(sf::RenderWindow& window, Board& board1, Board& board2, sf::Texture& texture,
+ScreenState MineMode(sf::RenderWindow& window, Board board1, Board board2, sf::Texture& texture,
     int positions1[5][2], int positions2[5][2], sf::View gameView,
     std::string name1, std::string name2);
 

@@ -9,7 +9,7 @@ using namespace sf;
 using namespace std;
 
 
-ScreenState maingame(sf::RenderWindow& window, Board& board, sf::Texture& texture, int positions[5][2], sf::View gameView, Player players[100], int& playerCount)
+ScreenState maingame(sf::RenderWindow& window, Board board, sf::Texture& texture, int positions[5][2], sf::View gameView, Player players[100], int& playerCount)
 {
 	ScreenState screenstate = GAME;
 	void initializeSpriteGrid(Sprite grid[10][10], Texture & texture, int rows, int cols, float colsize, float rowsize, int offset, float scale, int tempoffsety = 66);
@@ -428,18 +428,7 @@ ScreenState maingame(sf::RenderWindow& window, Board& board, sf::Texture& textur
 						for (int j = 0; j < cols; j++) {
 							FloatRect cellBounds = board.grid[i][j].getGlobalBounds();
 							FloatRect cellBounds2 = grid2[i][j].getGlobalBounds();
-							if (!player)
-							{
-								if (cellBounds.contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y)))
-								{
-
-									movablesquare.setPosition(j * colsize * scale + offset, i * rowsize * scale + offset);
-
-									break;
-
-								}
-							}
-							else
+							if(player)
 							{
 								if (cellBounds2.contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
 									boundingbox.setOutlineColor(greycol);
@@ -573,18 +562,18 @@ ScreenState maingame(sf::RenderWindow& window, Board& board, sf::Texture& textur
 		}
 		
 	
-		if (!player)
+		if (!player)////randomized computer turn
 		{
-	
+
 			int i = 0;
 			int j = 0;
 			placed = 0;
-			
-			
-			
+
+
+
 
 			// Update the timer once per second
-			if (clock.getElapsedTime().asSeconds() >= 2.0f)
+			if (clock.getElapsedTime().asSeconds() >= 1.0f)
 			{
 				while (placed == 0)
 				{
@@ -593,7 +582,6 @@ ScreenState maingame(sf::RenderWindow& window, Board& board, sf::Texture& textur
 				}
 				compscore--;
 				bool exists = 0;
-				cout << "weare looking at" << i << " " << j << endl;
 				if (gridval[i][j] == 1)
 				{
 					board.grid[i][j].setColor(Color::Red);
@@ -604,9 +592,8 @@ ScreenState maingame(sf::RenderWindow& window, Board& board, sf::Texture& textur
 				{
 					board.grid[i][j].setColor(Color::Green);
 					gridval[i][j] = 2;
-					cout << "just set colour";
 				}
-				
+
 
 				if (AllSunk(PlayerPoints, Vector2i(i, j), shipnum, exists, board) && exists)
 				{
@@ -652,9 +639,7 @@ ScreenState maingame(sf::RenderWindow& window, Board& board, sf::Texture& textur
 				movablesquare.setPosition(grid2[0][0].getPosition());
 				player = !player;
 
-
 			}
-			
 			
 		}
 

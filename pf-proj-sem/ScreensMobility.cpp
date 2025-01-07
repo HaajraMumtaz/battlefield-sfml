@@ -8,7 +8,10 @@ using namespace sf;
 
 int main()
 {
-
+    Texture globaltexture;
+    if (!globaltexture.loadFromFile("D:\\haajra\\battlefield_PF\\additional files\\field-bg.jpg")) {
+        cerr << "Error loading texture!" << endl;
+    }
     Player players[100];
     int playerCount;
     RenderWindow window(VideoMode::getDesktopMode(), "Screen Switch Example");
@@ -54,6 +57,7 @@ int main()
         }
         else if (currentState == NEWMODE)
         {
+
             if (newmodestate == 0)
             {
                 newmodestate = 1;
